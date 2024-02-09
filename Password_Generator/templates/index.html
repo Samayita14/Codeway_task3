@@ -1,0 +1,54 @@
+
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+	<meta charset="UTF-8" /> 
+	<meta name="viewport"
+		content="width=device-width, 
+				initial-scale=1.0" /> 
+	<link rel="stylesheet" href="/static/style.css" /> 
+	<title>Password Generator</title> 
+</head> 
+
+<body> 
+	<h1>Password Generator</h1> 
+    <form action="{% url 'generatepwd' %}" method="post">
+        {% csrf_token %}
+        <div class="generator"> 
+            <div class="password"> 
+                <input type="text" value="{{password}}" id="pwd" /> 
+                <button id="copybtn" onclick="copyfunction()">copy</button> 
+            </div> 
+            <div class="range"> 
+                <input type="range" min="4"
+                    max="24" value="8" class="length" name="charlen"/> 
+                <span class="lengthValue"></span> 
+            </div> 
+            
+            <button class="generate"> 
+                Generate Password 
+            </button> 
+        </div> 
+    </form>
+	
+    <script>
+        let value = document.querySelector('.lengthValue');
+        let input = document.querySelector('.length');
+        value.textContent = input.value
+        input.addEventListener('input',(event) => {
+            value.textContent = event.target.value;
+        })
+
+        function copyfunction(){
+            let copytext = document.getElementById('pwd')
+            copytext.select()
+            document.execCommand("copy")
+        }
+        document.getElementById('copybtn').addEventListener('click',(event)=> {
+            event.preventDefault();
+        })
+    </script>
+</body> 
+
+</html>
