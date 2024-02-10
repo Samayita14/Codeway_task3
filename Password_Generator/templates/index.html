@@ -12,12 +12,12 @@
 </head> 
 
 <body> 
-	<h1>Password Generator</h1> 
     <form action="{% url 'generatepwd' %}" method="post">
         {% csrf_token %}
         <div class="generator"> 
+            <h1>Password Generator</h1> 
             <div class="password"> 
-                <input type="text" value="{{password}}" id="pwd" /> 
+                <input type="text" value="{{password}}" id="pwd" style="outline: none;"/> 
                 <button id="copybtn" onclick="copyfunction()">copy</button> 
             </div> 
             <div class="range"> 
@@ -44,6 +44,7 @@
             let copytext = document.getElementById('pwd')
             copytext.select()
             document.execCommand("copy")
+            alert("Successfully copied to clipboard!");
         }
         document.getElementById('copybtn').addEventListener('click',(event)=> {
             event.preventDefault();
